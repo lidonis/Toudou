@@ -1,3 +1,11 @@
+import Libs.cucumber_java8
+import Libs.cucumber_junit
+import Libs.http4k_bom
+import Libs.http4k_core
+import Libs.http4k_format_jackson
+import Libs.http4k_testing_kotest
+import Testing.kotest
+
 plugins {
     kotlin("jvm")
 }
@@ -16,17 +24,17 @@ val serverTestImplementation: Configuration by configurations.getting {
 }
 
 dependencies {
-    testImplementation(kotlin("stdlib"))
-    testImplementation("io.cucumber:cucumber-java8:6.10.4")
-    testImplementation("io.cucumber:cucumber-junit:6.10.4")
-    testImplementation("io.kotest:kotest-assertions-core:4.6.0")
+    testImplementation(Kotlin.stdlib.jdk8)
+    testImplementation(cucumber_java8)
+    testImplementation(cucumber_junit)
+    testImplementation(kotest.assertions.core)
     "domainTestImplementation"(project(":toudou-domain"))
     "serverTestImplementation"(project(":toudou-server"))
-    "serverTestImplementation"(platform("org.http4k:http4k-bom:4.9.10.0"))
-    "serverTestImplementation"("org.http4k:http4k-core")
-    "serverTestImplementation"("org.http4k:http4k-testing-kotest")
-    "serverTestImplementation"("org.http4k:http4k-format-jackson")
-    "serverTestImplementation"("io.kotest:kotest-assertions-json:4.6.0")
+    "serverTestImplementation"(platform(http4k_bom))
+    "serverTestImplementation"(http4k_core)
+    "serverTestImplementation"(http4k_testing_kotest)
+    "serverTestImplementation"(http4k_format_jackson)
+    "serverTestImplementation"(kotest.assertions.json)
 }
 
 tasks.test {

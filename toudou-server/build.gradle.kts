@@ -1,13 +1,19 @@
+import Libs.http4k_bom
+import Libs.http4k_client_apache
+import Libs.http4k_core
+import Libs.http4k_format_jackson
+import Libs.http4k_server_undertow
+
 plugins {
     kotlin("jvm")
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
+    implementation(Kotlin.stdlib.jdk8)
     implementation(project(":toudou-domain"))
-    implementation(platform("org.http4k:http4k-bom:4.9.10.0"))
-    implementation("org.http4k:http4k-core")
-    implementation("org.http4k:http4k-server-undertow")
-    implementation("org.http4k:http4k-client-apache")
-    implementation("org.http4k:http4k-format-jackson")
+    implementation(platform(http4k_bom))
+    implementation(http4k_core)
+    implementation(http4k_server_undertow)
+    implementation(http4k_client_apache)
+    implementation(http4k_format_jackson)
 }
