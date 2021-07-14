@@ -1,6 +1,5 @@
 package fr.lidonis.toudou.acceptance.server
 
-import com.fasterxml.jackson.databind.JsonNode
 import fr.lidonis.toudou.server.toudouApp
 import io.cucumber.java8.En
 import io.kotest.assertions.assertSoftly
@@ -15,15 +14,6 @@ import org.http4k.kotest.shouldHaveHeader
 import org.http4k.kotest.shouldHaveStatus
 
 val json = Jackson
-
-// DSL JSON library API:
-val objectUsingDslApi: JsonNode = json {
-    obj(
-        "thisIsAString" to string("stringValue"),
-        "thisIsANumber" to number(12345),
-        "thisIsAList" to array(listOf(boolean(true)))
-    )
-}
 
 class ToudouSteps : En {
 
