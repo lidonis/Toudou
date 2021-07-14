@@ -26,7 +26,7 @@ dependencies {
     "serverTestImplementation"("org.http4k:http4k-core")
     "serverTestImplementation"("org.http4k:http4k-testing-kotest")
     "serverTestImplementation"("org.http4k:http4k-format-jackson")
-    "serverTestImplementation"("io.kotest:kotest-assertions-json:4.6.0")
+    "serverTestImplementation"("io.kotest:kotest-assertions-json:4.6.1")
 }
 
 tasks.test {
