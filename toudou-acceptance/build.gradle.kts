@@ -19,7 +19,7 @@ dependencies {
     testImplementation(kotlin("stdlib"))
     testImplementation("io.cucumber:cucumber-java8:6.10.4")
     testImplementation("io.cucumber:cucumber-junit:6.10.4")
-    testImplementation("io.kotest:kotest-assertions-core:4.6.0")
+    testImplementation("io.kotest:kotest-assertions-core:4.6.1")
     "domainTestImplementation"(project(":toudou-domain"))
     "serverTestImplementation"(project(":toudou-server"))
     "serverTestImplementation"(platform("org.http4k:http4k-bom:4.9.10.0"))
