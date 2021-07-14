@@ -10,6 +10,8 @@
  * See https://github.com/jmfayard/refreshVersions
  */
 object Libs {
+    const val logback_classic: String = "ch.qos.logback:logback-classic:_"
+
     const val de_fayard_buildsrclibs_gradle_plugin: String =
         "de.fayard.buildSrcLibs:de.fayard.buildSrcLibs.gradle.plugin:_"
 
@@ -20,6 +22,10 @@ object Libs {
     const val kotest_assertions_core: String = "io.kotest:kotest-assertions-core:_"
 
     const val kotest_assertions_json: String = "io.kotest:kotest-assertions-json:_"
+
+    const val ktor_server_core: String = "io.ktor:ktor-server-core:_"
+
+    const val ktor_server_netty: String = "io.ktor:ktor-server-netty:_"
 
     const val http4k_bom: String = "org.http4k:http4k-bom:_"
 
@@ -38,8 +44,6 @@ object Libs {
 
     const val kotlin_scripting_compiler_embeddable: String =
         "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:_"
-
-    const val kotlin_stdlib: String = "org.jetbrains.kotlin:kotlin-stdlib"
 
     const val kotlin_stdlib_jdk8: String = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:_"
 }

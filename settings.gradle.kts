@@ -1,5 +1,5 @@
 rootProject.name = "toudou"
-include("toudou-acceptance", "toudou-domain", "toudou-server")
+include("toudou-acceptance", "toudou-domain", "toudou-server", "toudou-server-ktor")
 plugins {
     // See https://jmfayard.github.io/refreshVersions
     id("de.fayard.refreshVersions") version "0.10.1"
@@ -7,4 +7,5 @@ plugins {
 
 refreshVersions {
     enableBuildSrcLibs()
+    extraArtifactVersionKeyRules
 }
