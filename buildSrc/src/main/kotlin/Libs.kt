@@ -12,7 +12,32 @@
 object Libs {
     const val logback_classic: String = "ch.qos.logback:logback-classic:_"
 
+    const val de_fayard_buildsrclibs_gradle_plugin: String =
+        "de.fayard.buildSrcLibs:de.fayard.buildSrcLibs.gradle.plugin:_"
+
     const val cucumber_java8: String = "io.cucumber:cucumber-java8:_"
 
     const val cucumber_junit: String = "io.cucumber:cucumber-junit:_"
+
+    const val kotest_assertions_ktor: String = "io.kotest.extensions:kotest-assertions-ktor:_"
+
+    const val kotest_assertions_core: String = "io.kotest:kotest-assertions-core:_"
+
+    const val kotest_assertions_json: String = "io.kotest:kotest-assertions-json:_"
+
+    const val ktor_gson: String = "io.ktor:ktor-gson:_"
+
+    const val ktor_server_core: String = "io.ktor:ktor-server-core:_"
+
+    const val ktor_server_netty: String = "io.ktor:ktor-server-netty:_"
+
+    const val ktor_server_test_host: String = "io.ktor:ktor-server-test-host:_"
+
+    const val org_jetbrains_kotlin_jvm_gradle_plugin: String =
+        "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:_"
+
+    const val kotlin_scripting_compiler_embeddable: String =
+        "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:_"
+
+    const val kotlin_stdlib_jdk8: String = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:_"
 }

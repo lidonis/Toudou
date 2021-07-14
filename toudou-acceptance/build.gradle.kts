@@ -1,5 +1,6 @@
 import Libs.cucumber_java8
 import Libs.cucumber_junit
+import Libs.kotest_assertions_ktor
 import Testing.Kotest
 
 plugins {
@@ -37,7 +38,7 @@ dependencies {
     "domainTestImplementation"(project(":toudou-domain"))
     "serverTestImplementation"(project(":toudou-server"))
     "serverTestImplementation"(Ktor.server.testHost)
-    "serverTestImplementation"("io.kotest.extensions:kotest-assertions-ktor:_")
+    "serverTestImplementation"(kotest_assertions_ktor)
     "serverTestImplementation"(Kotest.assertions.json)
 }
 
