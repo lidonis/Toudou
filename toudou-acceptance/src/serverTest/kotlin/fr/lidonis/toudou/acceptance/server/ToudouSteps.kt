@@ -1,23 +1,26 @@
-package fr.lidonis.toudou.acceptance.server
+package fr.lidonis.toudou.acceptance.serverktor
 
-import fr.lidonis.toudou.server.toudouApp
+import fr.lidonis.toudou.server.module
 import io.cucumber.java8.En
 import io.kotest.assertions.assertSoftly
-import org.http4k.core.ContentType
-import org.http4k.core.Method
-import org.http4k.core.Request
-import org.http4k.core.Response
-import org.http4k.core.Status.Companion.OK
-import org.http4k.format.Jackson
-import org.http4k.kotest.shouldHaveBody
-import org.http4k.kotest.shouldHaveHeader
-import org.http4k.kotest.shouldHaveStatus
+import io.kotest.assertions.json.shouldContainJsonKey
+import io.kotest.assertions.json.shouldContainJsonKeyValue
+import io.kotest.assertions.ktor.shouldHaveContent
+import io.kotest.assertions.ktor.shouldHaveHeader
+import io.kotest.assertions.ktor.shouldHaveStatus
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.http.ContentType.Application.Json
+import io.ktor.http.HttpMethod.Companion.Get
+import io.ktor.http.HttpMethod.Companion.Post
+import io.ktor.http.HttpStatusCode.Companion.OK
+import io.ktor.server.testing.*
+import java.nio.charset.StandardCharsets
 
-val json = Jackson
 
 class ToudouSteps : En {
 
-    private lateinit var response: Response
+    private lateinit var response: TestApplicationResponse
 
     init {
         Given("Empty/A toudous") {
@@ -25,36 +28,45 @@ class ToudouSteps : En {
         }
 
         When("I list all toudous") {
-            response = toudouApp(Request(Method.GET, "/"))
+            withTestApplication(Application::module) {
+                response = handleRequest(Get, "/").response
+            }
         }
         When("I add a toudou with label {string}") { label: String ->
-            response = toudouApp(Request(Method.POST, "/").body(json {
-                obj(
-                    "label" to string(label)
-                )
-            }))
+            withTestApplication(Application::module) {
+                response = handleRequest(Post, "/") {
+                    addHeader(HttpHeaders.ContentType, Json.toString())
+                    setBody("{ \"label\": \"${label}\" }")
+                }.response
+            }
         }
 
         Then("my toudous are empty") {
             assertSoftly(response) {
                 shouldHaveStatus(OK)
-                shouldHaveHeader("content-type", ContentType.APPLICATION_JSON.toHeaderValue())
-                shouldHaveBody("[]")
+                shouldHaveHeader(
+                    HttpHeaders.ContentType,
+                    Json.withCharset(StandardCharsets.UTF_8).toString()
+                )
+                shouldHaveContent("[]")
             }
         }
         Then("a toudou should be created") {
             assertSoftly(response) {
                 shouldHaveStatus(OK)
-                shouldHaveHeader("content-type", ContentType.APPLICATION_JSON.toHeaderValue())
+                shouldHaveHeader(
+                    HttpHeaders.ContentType,
+                    Json.withCharset(StandardCharsets.UTF_8).toString()
+                )
             }
         }
 
         Then("the toudou should have an Id") {
-            response.body.shouldContainJsonKey("toudouId")
+            response.content.shouldContainJsonKey("toudouId")
         }
 
         Then("the toudou should have a label {string}") { label: String ->
-            response.body.shouldContainJsonKeyValue("$.label", label)
+            response.content.shouldContainJsonKeyValue("label", label)
         }
 
     }

@@ -1,19 +1,19 @@
-import Libs.http4k_bom
-import Libs.http4k_client_apache
-import Libs.http4k_core
-import Libs.http4k_format_jackson
-import Libs.http4k_server_undertow
+import Libs.logback_classic
 
 plugins {
+    application
     kotlin("jvm")
 }
 
 dependencies {
-    implementation(Kotlin.stdlib.jdk8)
     implementation(project(":toudou-domain"))
-    implementation(platform(http4k_bom))
-    implementation(http4k_core)
-    implementation(http4k_server_undertow)
-    implementation(http4k_client_apache)
-    implementation(http4k_format_jackson)
+    implementation(Kotlin.stdlib.jdk8)
+    implementation(Ktor.server.core)
+    implementation(Ktor.server.netty)
+    implementation(Ktor.features.gson)
+    implementation(logback_classic)
+}
+
+application {
+    mainClass.set("io.ktor.server.netty.EngineMain")
 }

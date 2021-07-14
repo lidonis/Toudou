@@ -12,38 +12,7 @@
 object Libs {
     const val logback_classic: String = "ch.qos.logback:logback-classic:_"
 
-    const val de_fayard_buildsrclibs_gradle_plugin: String =
-        "de.fayard.buildSrcLibs:de.fayard.buildSrcLibs.gradle.plugin:_"
-
     const val cucumber_java8: String = "io.cucumber:cucumber-java8:_"
 
     const val cucumber_junit: String = "io.cucumber:cucumber-junit:_"
-
-    const val kotest_assertions_core: String = "io.kotest:kotest-assertions-core:_"
-
-    const val kotest_assertions_json: String = "io.kotest:kotest-assertions-json:_"
-
-    const val ktor_server_core: String = "io.ktor:ktor-server-core:_"
-
-    const val ktor_server_netty: String = "io.ktor:ktor-server-netty:_"
-
-    const val http4k_bom: String = "org.http4k:http4k-bom:_"
-
-    const val http4k_client_apache: String = "org.http4k:http4k-client-apache"
-
-    const val http4k_core: String = "org.http4k:http4k-core"
-
-    const val http4k_format_jackson: String = "org.http4k:http4k-format-jackson"
-
-    const val http4k_server_undertow: String = "org.http4k:http4k-server-undertow"
-
-    const val http4k_testing_kotest: String = "org.http4k:http4k-testing-kotest"
-
-    const val org_jetbrains_kotlin_jvm_gradle_plugin: String =
-        "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:_"
-
-    const val kotlin_scripting_compiler_embeddable: String =
-        "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:_"
-
-    const val kotlin_stdlib_jdk8: String = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:_"
 }

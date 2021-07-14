@@ -1,66 +1,46 @@
 import Libs.cucumber_java8
 import Libs.cucumber_junit
-import Libs.http4k_bom
-import Libs.http4k_core
-import Libs.http4k_format_jackson
-import Libs.http4k_testing_kotest
-import Testing.kotest
+import Testing.Kotest
 
 plugins {
     kotlin("jvm")
 }
 
-sourceSets {
-    create("domainTest") {}
-    create("serverTest") {}
-}
+listOf("domain", "server").forEach {
+    sourceSets {
+        create("${it}Test") {}
+    }
+    configurations {
+        "${it}TestImplementation" {
+            extendsFrom(configurations.testImplementation.get())
+        }
+    }
 
-val domainTestImplementation: Configuration by configurations.getting {
-    extendsFrom(configurations.testImplementation.get())
-}
+    val newTest = task<Test>("${it}Test") {
+        description = "Runs ${it} tests."
+        group = "verification"
 
-val serverTestImplementation: Configuration by configurations.getting {
-    extendsFrom(configurations.testImplementation.get())
+        testClassesDirs = sourceSets["${it}Test"].output.classesDirs
+        classpath = sourceSets["${it}Test"].runtimeClasspath
+        shouldRunAfter("test")
+    }
+    tasks.check {
+        dependsOn(newTest)
+    }
 }
 
 dependencies {
     testImplementation(Kotlin.stdlib.jdk8)
     testImplementation(cucumber_java8)
     testImplementation(cucumber_junit)
-    testImplementation(kotest.assertions.core)
+    testImplementation(Kotest.assertions.core)
     "domainTestImplementation"(project(":toudou-domain"))
     "serverTestImplementation"(project(":toudou-server"))
-    "serverTestImplementation"(platform(http4k_bom))
-    "serverTestImplementation"(http4k_core)
-    "serverTestImplementation"(http4k_testing_kotest)
-    "serverTestImplementation"(http4k_format_jackson)
-    "serverTestImplementation"(kotest.assertions.json)
+    "serverTestImplementation"(Ktor.server.testHost)
+    "serverTestImplementation"("io.kotest.extensions:kotest-assertions-ktor:_")
+    "serverTestImplementation"(Kotest.assertions.json)
 }
 
 tasks.test {
     useJUnitPlatform()
 }
-
-val domainTest = task<Test>("domainTest") {
-    description = "Runs domain tests."
-    group = "verification"
-
-    testClassesDirs = sourceSets["domainTest"].output.classesDirs
-    classpath = sourceSets["domainTest"].runtimeClasspath
-    shouldRunAfter("test")
-}
-
-val serverTest = task<Test>("serverTest") {
-    description = "Runs server tests."
-    group = "verification"
-
-    testClassesDirs = sourceSets["serverTest"].output.classesDirs
-    classpath = sourceSets["serverTest"].runtimeClasspath
-    shouldRunAfter("test")
-}
-
-tasks.check {
-    dependsOn(domainTest)
-    dependsOn(serverTest)
-}
-

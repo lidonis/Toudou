@@ -1,5 +1,5 @@
 rootProject.name = "toudou"
-include("toudou-acceptance", "toudou-domain", "toudou-server", "toudou-server-ktor")
+include("toudou-acceptance", "toudou-domain", "toudou-server")
 plugins {
     // See https://jmfayard.github.io/refreshVersions
     id("de.fayard.refreshVersions") version "0.10.1"
