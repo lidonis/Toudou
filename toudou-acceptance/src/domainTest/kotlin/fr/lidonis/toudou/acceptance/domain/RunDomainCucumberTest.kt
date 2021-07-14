@@ -1,4 +1,4 @@
-package fr.lidonis.toudou.acceptance
+package fr.lidonis.toudou.acceptance.domain
 
 import io.cucumber.junit.Cucumber
 import io.cucumber.junit.CucumberOptions
